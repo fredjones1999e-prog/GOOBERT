@@ -1,0 +1,22 @@
+GOOBERT VOIP — ACTUAL MAINTENANCE MODE PATCH
+
+This version adds Vercel Edge Middleware. When site_settings.is_offline is true,
+Vercel returns a standalone HTTP 503 maintenance page before the normal Goobert
+app or its API routes load. When /online sets it false, normal pages return.
+
+DEPLOY:
+1. Confirm maintenance-upgrade.sql was successfully run in the SAME Supabase
+   project: bdbzpwsdjuoigpxntlim.
+2. In the existing GitHub repository connected to Vercel project goobert-voip-9,
+   upload/replace the CONTENTS of this ZIP's goobert-voip folder at the app root
+   (where index.html, app.js, package.json and vercel.json are).
+3. Make sure middleware.js is placed at that same project root, next to
+   index.html and package.json — NOT inside a nested folder.
+4. Commit the changes and wait for Vercel Production deployment to say Ready.
+5. In Goobert Admin, run /status, then /offline. Open the main site in a new
+   private/incognito window. It should show the maintenance page and return
+   HTTP 503. Run /online to restore the website.
+
+If /offline reports a Supabase error in Admin, the Admin service-role key or
+site_settings table setup is still wrong. The middleware cannot work until
+site_settings is readable with the public Supabase key.
