@@ -1,5 +1,6 @@
 import { Room, RoomEvent } from 'https://esm.sh/livekit-client@2.15.6';
 /* Goobert VoIP - browser client. Supabase anon key is public by design; database RLS is essential. */
+const GOOBERT_VOIP_VERSION = 1;
 const SUPABASE_URL='https://bdbzpwsdjuoigpxntlim.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_VqRbHogpVXM8DEwPb9xQvQ_y5bME2ZW';
 const $=id=>document.getElementById(id);let sb=null,user=null,profile=null,activeCall=null,pc=null,localStream=null,callSub=null,iceSub=null,callWatch=null,incomingWatch=null,authMode='signup',seenIncoming=new Set(),pendingCandidates=[],seenRemoteIce=new Set(),answerApplied=false;
@@ -458,8 +459,21 @@ async function renderCommunityMessages(rows){
   const names=new Map((profiles||[]).map(p=>[p.id,p.username]));
   rows.forEach(r=>appendCommunityMessage(r,names.get(r.user_id)||'member'));
 }
+function appendCommunitySystemMessage(content){
+  const box=$('chatMessages');if(!box)return;
+  const item=document.createElement('div');item.className='community-message community-system-message';
+  const name=document.createElement('b');name.textContent='GOOBERT SYSTEM';
+  const body=document.createElement('p');body.textContent=content;
+  const time=document.createElement('small');time.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  item.append(name,body,time);box.append(item);box.scrollTop=box.scrollHeight;
+}
 $('chatForm')?.addEventListener('submit',async e=>{
   e.preventDefault();const content=$('chatInput').value.trim();if(!content||!activeTextChannel||activeTextChannel.type!=='text')return;
+  if(content.toLowerCase()==='/voip'){
+    $('chatInput').value='';
+    appendCommunitySystemMessage('Goobert VoIP version '+GOOBERT_VOIP_VERSION+'.');
+    return;
+  }
   const {error}=await sb.from('server_messages').insert({channel_id:activeTextChannel.id,user_id:user.id,content});
   if(error)communityNotice(error.message);else $('chatInput').value='';
 });

@@ -1,0 +1,4 @@
+Goobert VoIP version: 1
+Type /voip in any community text channel to display the current version.
+The command is handled locally and is not posted to the shared channel.
+For the next new Goobert VoIP ZIP update, increment this version to 2.

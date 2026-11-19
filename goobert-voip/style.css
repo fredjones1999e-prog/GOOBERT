@@ -164,3 +164,17 @@ body.is-calling .voice-bars i:nth-child(2n){animation-delay:.15s}body.is-calling
   .person-actions{flex-direction:row;gap:6px}
   .person-actions button{flex:1 1 0;padding:8px 5px;font-size:10px}
 }
+
+/* Goobert system command response */
+.community-system-message{
+  border:1px solid rgba(167,139,250,.28);
+  background:rgba(139,92,246,.08);
+  border-radius:12px;
+  padding:10px 12px;
+}
+.community-system-message>b{
+  color:#bda4ff;
+  letter-spacing:.08em;
+  font-size:10px;
+}
+.community-system-message>p{color:#f0eaff}
