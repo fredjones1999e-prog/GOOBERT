@@ -1,0 +1,10 @@
+GOOBERT VOIP MAINTENANCE PATCH
+
+1. Run maintenance-upgrade.sql in Supabase SQL Editor and click Run.
+2. In your existing GitHub repository fredjones1999e-prog/GOOBERT, replace the contents of the goobert-voip app folder with the files in this ZIP's goobert-voip folder.
+3. Commit the changes. Vercel should deploy to your existing project goobert-voip-9.
+4. Deploy the separate Goobert Admin website and configure its environment variables using its README.txt.
+
+Once both are deployed, /offline in the admin website makes Goobert show the maintenance screen. /online restores access.
+
+Note: This is a website maintenance screen, not a shutdown of Vercel or Supabase APIs. The app checks status on initial load and every 10 seconds, including when initially offline.
