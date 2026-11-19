@@ -1,6 +1,6 @@
 import { Room, RoomEvent } from 'https://esm.sh/livekit-client@2.15.6';
 /* Goobert VoIP - browser client. Supabase anon key is public by design; database RLS is essential. */
-const GOOBERT_VOIP_VERSION = 1;
+const GOOBERT_VOIP_VERSION = 2;
 const SUPABASE_URL='https://bdbzpwsdjuoigpxntlim.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY='sb_publishable_VqRbHogpVXM8DEwPb9xQvQ_y5bME2ZW';
 const $=id=>document.getElementById(id);let sb=null,user=null,profile=null,activeCall=null,pc=null,localStream=null,callSub=null,iceSub=null,callWatch=null,incomingWatch=null,authMode='signup',seenIncoming=new Set(),pendingCandidates=[],seenRemoteIce=new Set(),answerApplied=false;
