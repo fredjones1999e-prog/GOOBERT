@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080914"><meta name="description" content="Goobert VoIP — talk, connect, Goobertify.">
+  <title>Goobert VoIP</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Goobert VoIP home"><div class="logo">G</div><div><b>Goobert <span>VoIP</span></b><small>Talk. Connect. Goobertify.</small></div><i class="brand-online"></i></a>
+      <div class="global-search"><span>⌕</span><input id="userSearch" placeholder="Search for users..." aria-label="Search for users"><button id="searchBtn" title="Search">⌕</button></div>
+      <div class="top-user"><span class="status-dot"></span><span id="headerUser">Guest</span><div class="mini-avatar" id="topAvatar">G</div></div>
+    </header>
+
+    <section id="authView" class="auth-card panel hidden">
+      <div class="auth-art"><div class="auth-orbit">✦</div><div class="mascot-large">G</div><h2>Good vibes.<br>Clear connections.</h2><p>Your people are just one call away.</p></div>
+      <div class="auth-form-wrap"><div class="eyebrow">WELCOME TO GOOBERT</div><h1 id="authTitle">Create your account</h1><p id="authSubtitle">Pick a username so friends can find and call you.</p>
+        <form id="authForm"><label id="usernameWrap">Username <span class="optional-tag">optional</span><input id="username" minlength="3" maxlength="20" placeholder="Leave blank and we’ll make one for you" autocomplete="username"><small class="field-help">Friends use this name to find you. You can leave it blank for now.</small></label><label>Email address<input id="email" type="email" required placeholder="you@example.com" autocomplete="email"></label><label>Password<div class="password-field"><input id="password" type="password" required minlength="6" placeholder="At least 6 characters" autocomplete="new-password"><button type="button" id="togglePassword" class="show-password">Show</button></div></label><button class="primary wide" id="authSubmit">Create account <span>→</span></button></form>
+        <p class="switch"><span id="switchText">Already have an account?</span> <button id="switchAuth" class="linkbtn">Log in</button></p>
+        <p class="switch"><button type="button" id="forgotPassword" class="linkbtn hidden">Forgot password?</button></p>
+        <div id="passwordRecoveryPanel" class="account-panel hidden">
+          <h3>Choose a new password</h3>
+          <label>New password<input id="newPassword" type="password" minlength="6" autocomplete="new-password" placeholder="At least 6 characters"></label>
+          <button type="button" id="saveNewPassword" class="primary wide">Save new password</button>
+        </div>
+        <p id="authMessage" class="message"></p>
+      </div>
+    </section>
+
+    <section id="appView" class="dashboard hidden">
+      <aside class="left-rail panel">
+        <div class="rail-heading"><div class="side-logo">G</div><div><b>GOOBERT</b><small>YOUR SPACE</small></div></div>
+        <div class="nav-label">MENU</div>
+        <nav class="nav"><a class="nav-item active" href="#home"><span>⌂</span>Home</a><a class="nav-item" href="#calls"><span>♧</span>Calls</a><a class="nav-item" href="#friends"><span>♙</span>Friends</a><a class="nav-item" href="#settings"><span>⚙</span>Settings</a><a class="nav-item" href="#profile"><span>◎</span>Profile</a></nav>
+        <div class="rail-promo"><div class="planet">◉</div><b>Goobertify<br>your calls!</b><small>Stay close, wherever.</small></div>
+        <div class="my-profile"><div class="mini-avatar" id="myAvatar">G</div><div class="my-meta"><b id="myName">Username</b><small><i class="status-dot"></i> Online</small></div><button id="logout" class="logout" title="Log out">↗</button></div>
+      </aside>
+
+      <section class="friends-column panel">
+        <div class="column-head"><div><div class="eyebrow">YOUR PEOPLE</div><h2>Friends <span class="online-count"><i class="status-dot"></i> Online</span></h2></div><button class="add-friend" id="focusSearch" title="Find a friend">＋</button></div>
+        <div id="searchResults" class="results"><div class="empty-state"><div class="empty-icon">⌕</div><b>Find your people</b><p>Search for a username above to start a call.</p></div></div>
+        <div class="friends-tip"><span>✦</span><div><b>Good to see you!</b><small>Invite a friend to Goobert VoIP and say hello.</small></div></div>
+      </section>
+
+      <section class="center-column">
+        <div class="call-stage panel">
+          <div class="stage-top"><div><i class="status-dot"></i><span id="stageStatus">READY TO CONNECT</span><span class="stage-time" id="callTimer"></span></div><div class="connection"><span>▂▅▇</span> SECURE CONNECTION</div></div>
+          <div class="stage-glow"></div><div class="sound-wave wave-left"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="call-identity"><div class="hero-avatar" id="heroAvatar">G</div><h2 id="callTitle">Your Goobert space</h2><p id="callSubtitle">Find a friend and start talking</p><div class="voice-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+          <div id="callPanel" class="call-panel"><div class="call-icon">✦</div><div><b>You're ready to talk</b><small>Choose a friend to start your first call.</small></div></div>
+          <div class="sound-wave wave-right"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div id="incomingPanel" class="incoming hidden"></div>
+        <section id="directMessagePanel" class="direct-message-panel panel hidden">
+          <div class="dm-head"><div><b id="dmTitle">Messages</b><small id="dmSubtitle">Private chat</small></div><button id="closeDm" class="ghost">Close</button></div>
+          <div id="dmMessages" class="dm-messages"><div class="dm-empty">Choose a friend and press Message.</div></div>
+          <form id="dmForm" class="dm-form"><input id="dmInput" maxlength="1500" placeholder="Write a message…" autocomplete="off"><button class="primary" type="submit">Send</button></form>
+        </section>
+        <div class="message-bar"><span>✉</span><button id="openDmFromStage" class="primary">Open messages</button><small>Message friends even when they are not on a call.</small></div>
+      </section>
+
+      <aside class="right-column">
+        <div class="info-card panel"><div class="info-title"><span>◈</span> Goobert News</div><h3>Welcome to Goobert VoIP!</h3><p>Stay connected with your friends, wherever life takes you.</p><div class="news-heart">♥</div></div>
+        <div class="info-card panel community-card">
+          <div class="info-title"><span>✦</span> Goobert Communities</div>
+          <div class="community-create">
+            <input id="serverNameInput" maxlength="40" placeholder="New community name">
+            <button id="createServerBtn" class="quick-action">＋ Create community</button>
+          </div>
+          <div class="community-join">
+            <input id="inviteCodeInput" maxlength="16" placeholder="Invite code">
+            <button id="joinServerBtn" class="quick-action">Join</button>
+          </div>
+          <div id="serverList" class="server-list"><small>Create or join a community to get started.</small></div>
+          <div id="serverWorkspace" class="server-workspace hidden">
+            <div class="server-workspace-head"><b id="activeServerName">Community</b><button id="copyInviteBtn" class="linkbtn">Copy invite</button></div>
+            <div id="channelList" class="channel-list"></div>
+            <div class="channel-actions">
+              <input id="newChannelInput" maxlength="32" placeholder="Channel name">
+              <button id="createTextChannelBtn" class="quick-action">＋ Text</button>
+              <button id="createVoiceChannelBtn" class="quick-action">＋ Voice</button>
+            </div>
+            <div id="communityChat" class="community-chat">
+              <div id="chatMessages" class="chat-messages"></div>
+              <form id="chatForm" class="chat-form"><input id="chatInput" maxlength="1500" placeholder="Message this channel…"><button class="primary" type="submit">Send</button></form>
+            </div>
+            <div id="voiceRoomPanel" class="voice-room-panel hidden">
+              <div><b id="voiceRoomTitle">Voice channel</b><small id="voiceRoomStatus">Not connected</small></div>
+              <div id="voiceParticipants" class="voice-participants"></div>
+              <button id="joinVoiceBtn" class="primary">Join voice</button>
+              <button id="voiceMuteBtn" class="ghost hidden">Mute mic</button>
+              <button id="leaveVoiceBtn" class="reject hidden">Leave voice</button>
+              <button id="leaveServerBtn" class="linkbtn">Leave community</button>
+            </div>
+          </div>
+          <p id="communityStatus" class="community-status"></p>
+        </div>
+        <div class="info-card panel quick-card"><div class="info-title"><span>ϟ</span> Quick Actions</div><button id="quickCall" class="quick-action"><span>☎</span> Start a call</button><button id="quickSearch" class="quick-action"><span>⌕</span> Search users</button><button id="quickSettings" class="quick-action"><span>⚙</span> Account settings</button><button id="editProfileBtn" class="quick-action"><span>◎</span> Edit my profile</button><button id="deleteAccount" class="quick-action danger-action"><span>×</span> Delete my account</button><button id="enableCallAlerts" class="quick-action"><span>♬</span> Enable ringtone & notifications</button></div>
+        <div class="mascot-card"><div class="mascot-copy"><span>✦ POWERED BY</span><b>Goobert</b></div><img src="goobert-mascot.png" alt="Goobert mascot giving a thumbs up"></div>
+      </aside>
+    </section>
+    <section id="profileEditor" class="profile-editor panel hidden">
+    <div class="profile-editor-head"><div><div class="eyebrow">YOUR IDENTITY</div><h2>Edit profile</h2></div><button id="closeProfileEditor" class="ghost">Close</button></div>
+    <label>Display name<input id="profileDisplayName" maxlength="32" placeholder="Your display name"></label>
+    <label>Avatar emoji<input id="profileAvatar" maxlength="4" placeholder="🐸"></label>
+    <label>About me<input id="profileBio" maxlength="120" placeholder="A little about you…"></label>
+    <label>Ringtone<select id="ringtoneChoice"><option value="classic">Classic</option><option value="bubbles">Bubbles</option><option value="synth">Synth</option><option value="soft">Soft chime</option></select></label>
+    <button id="saveProfileBtn" class="primary wide">Save profile</button><p id="profileSaveStatus" class="community-status"></p>
+  </section>
+  <footer>GOOBERT VOIP <span>•</span> TALK. CONNECT. GOOBERTIFY. <span>•</span> WEBRTC AUDIO</footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script type="module" src="app.js"></script>
+  <script>
+    document.getElementById('focusSearch')?.addEventListener('click',()=>document.getElementById('userSearch').focus());
+    document.getElementById('quickSearch')?.addEventListener('click',()=>document.getElementById('userSearch').focus());
+    document.getElementById('quickCall')?.addEventListener('click',()=>document.getElementById('userSearch').focus());
+  </script>
+</body></html>
