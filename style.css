@@ -98,3 +98,69 @@ body.is-calling .voice-bars i:nth-child(2n){animation-delay:.15s}body.is-calling
  .video-filter-control{flex:1 1 100%;justify-content:center}
  .call-video{width:100%;max-width:100%;min-width:0;max-height:240px}
 }
+
+
+/* Desktop friend cards: keep names readable in the narrow friends sidebar */
+.person{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  gap:9px;
+  min-width:0;
+  padding:11px;
+  overflow:visible;
+}
+.person-left{
+  display:flex;
+  align-items:center;
+  width:100%;
+  min-width:0;
+  flex:1 1 auto;
+  overflow:visible;
+}
+.person-left>div:last-child{
+  flex:1 1 auto;
+  min-width:0;
+  overflow:hidden;
+}
+.person b{
+  display:block;
+  width:100%;
+  max-width:100%;
+  color:#fff;
+  font-size:13px;
+  line-height:1.35;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  text-overflow:clip;
+}
+.person small{
+  display:block;
+  max-width:100%;
+  color:#aaaaca;
+  font-size:10px;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+.person-actions{
+  display:flex;
+  width:100%;
+  flex:0 0 auto;
+  flex-direction:row;
+  align-items:center;
+  gap:6px;
+}
+.person-actions button{
+  flex:1 1 0;
+  min-width:0;
+  min-height:36px;
+  padding:8px 6px;
+  white-space:nowrap;
+  font-size:11px;
+}
+@media(max-width:560px){
+  .person{padding:10px;gap:8px}
+  .person-actions{flex-direction:row;gap:6px}
+  .person-actions button{flex:1 1 0;padding:8px 5px;font-size:10px}
+}
